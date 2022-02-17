@@ -34,7 +34,7 @@ string unitQuar;
 string unitDime;
 string unitNick;
 string unitPenn;
-string outputStmt = "\nThe optimal denominations for your change are: \n";
+string outputStmt = "\nOptimal Change: \n";
 string numFiftStr;
 string numTwenStr;
 string numTensStr;
@@ -76,14 +76,12 @@ int optChange() {
        		//do nothing.
 	} else if (numFift == 1) {
 		unitFift = " $50 dollar bill \n";
-		ss << numFift;
-		ss >> numFiftStr;
+		numFiftStr += to_string(numFift);
 		outputStmt += numFiftStr + unitFift;
 		change -= 50;
 	} else if (numFift > 1) {
 		unitFift = " $50 dollar bills \n";
-		ss << numFift;
-	        ss >> numFiftStr;
+		numFiftStr += to_string(numFift);
 		outputStmt += numFiftStr + unitFift;
 		change -= (numFift * 50);
 		ss.clear();
@@ -97,8 +95,7 @@ int optChange() {
 		// do nothing.
 	} else if (numTwen == 1) {
 		unitTwen = " $20 dollar bill \n";
-		ss << numTwen;
-		ss >> numTwenStr;
+		numTwenStr += to_string(numTwen);
 		outputStmt += "1" + unitTwen;
 		change -= 20;
 	} else if (numTwen > 1) {
@@ -163,6 +160,41 @@ int optChange() {
 		change -= numOnes;
 	}
 
+//Calculating number of quarters
+
+	numQuar = (change / 0.25);
+	numQuar = round(numQuar);
+	if (numQuar == 0) {
+		// do nothing.
+	} else if (numQuar == 1) {
+		unitQuar = " x quarter \n";
+		numQuarStr += to_string(numQuar);
+		outputStmt += numQuarStr + unitQuar;
+		change -= 0.25;
+	} else if (numQuar > 1) {
+		unitQuar = " x quarters \n";
+		numQuarStr += to_string(numQuar);
+		outputStmt += numQuarStr + unitQuar;
+		change -= (numQuar * 0.25);
+	}
+
+//Calculating number of dimes
+
+	numDime = (change / 0.10);
+	numDime = round(numDime);
+	if (numDime == 0) {
+		//do nothing.
+	} else if (numDime == 1) {
+		unitDime = " x dime \n";
+		numDimeStr = to_string(numDime);
+		outputStmt += numDimeStr + unitDime;
+		change -= 0.10;
+	} else if (numDime > 1) {
+		unitDime = " x dimes \n";
+		numDimeStr += to_string(numDime);
+		outputStmt += numDimeStr + unitDime;
+		change -= (numDime * 0.10);
+	}
 
 cout << outputStmt << "\n";
 
@@ -186,6 +218,8 @@ int main() {
 		numTensStr = "";
 		numFiveStr = "";
 		numOnesStr = "";
+		numQuarStr = "";
+		numDimeStr = "";
 		outputStmt = "\nOptimal Change: \n";	
 		optChange();
 		cout << rtry;
