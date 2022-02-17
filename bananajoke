@@ -1,0 +1,51 @@
+#! /bin/bash
+clear;
+printf "Knock Knock! \n";
+printf "Your reply : ";
+read myResponse1;
+reply="Who\'s there?";
+if [[ $myResponse1 == $reply ]]
+then
+	printf "Banana! \n"
+	printf "Your reply : ";
+	read myResponseX;
+else 
+	printf "I SAIIID, KNOCK KNOCK! \n"
+	exit 1
+fi
+
+i=0;
+while (( $i < 2 ))
+do
+	printf "Knock Knock! \n";
+	printf "Your reply : ";
+	read myResponse2;
+	reply="Who\'s there?";
+	if [[ $myResponse2 == $reply ]]
+	then
+		printf "Banana! \n"
+		printf "Your reply : ";
+		read myResponse2;
+	
+	else
+		printf "I SAIIID, KNOCK KNOCK! \n"
+	        exit 1
+	fi
+	i=$(( $i + 1 ))
+
+done;
+printf "Knock Knock! \n";
+printf "Your reply : ";
+read myResponseX;
+printf "Orange! \n";
+printf "Your reply : ";
+read myResponse4;
+reply2="Orange who?";
+if [[ $myResponse4 == $reply2 ]]
+then
+	printf "Orange you glad I didn\'t say banana! \n\n"
+	printf "Knock Knock Jokes. Copyright ©2022 - BITYSI LLC \n";
+else
+        printf "I SAIIID, KNOCK KNOCK! \n"
+        exit 1
+fi

@@ -1,0 +1,10 @@
+#! /bin/bash
+clear;
+printf "Please enter your age : "
+read age;
+if (( age > 18 ))
+then
+	printf "Since you\'re $age, let\'s smoke.\n"
+else
+	printf "Do your parents know you\'re trying to smoke at $age?\n"
+fi
