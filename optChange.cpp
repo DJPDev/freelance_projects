@@ -12,10 +12,9 @@ using namespace std;
  * due. */
 
 //Initializing variables
-
-double payment = 0;
-double change = 0;
-double total = 0;
+float payment = 0;
+float change = 0;
+float total = 0;
 int numFift;
 int numTwen;
 int numTens;
@@ -34,7 +33,7 @@ string unitQuar;
 string unitDime;
 string unitNick;
 string unitPenn;
-string outputStmt = "\nOptimal Change: \n";
+string outputStmt = "\nOptimal Change: \n\n";
 string numFiftStr;
 string numTwenStr;
 string numTensStr;
@@ -69,7 +68,7 @@ int optChange() {
 	cout << "Your change due is: $" << change << "\n";
 
 //Starting logic to calculate optimal denominations
-	
+while (change > 50) {	
 	numFift = (change / 50);
 	numFift = round(numFift);
 	if (numFift == 0) {
@@ -86,9 +85,10 @@ int optChange() {
 		change -= (numFift * 50);
 		ss.clear();
 	}
-	
+}
+
 //Calculating number of twenties
-	
+while (change > 20) {	
 	numTwen = (change / 20);
 	numTwen = round(numTwen);
 	if (numTwen == 0) {
@@ -105,9 +105,10 @@ int optChange() {
 		change -= (numTwen * 20);
 	}
 
+}
 
 //Calculating number of Tens
-	
+while (change > 10) {	
 	numTens = (change / 10);
 	numTens = round(numTens);
 	if (numTens == 0) {
@@ -123,9 +124,10 @@ int optChange() {
 		outputStmt += numTensStr + unitTens;
 		change -= (numTens * 10);
 	}
+}
 
 //Calculating number of Fives
-
+while (change > 5) {
 	numFive = (change / 5);
         numFive = round(numFive);
 	if (numFive == 0) {
@@ -141,9 +143,10 @@ int optChange() {
 		 outputStmt += numFiveStr + unitFive;
 		 change -= (numFive * 5);
 	 }
+}
 
 //Calculating number of Ones
-
+while (change > 1) {
 	numOnes = (change / 1);
 	numOnes = round(numOnes);
 	if (numOnes == 0) {
@@ -159,11 +162,11 @@ int optChange() {
 		outputStmt += numOnesStr + unitOnes;
 		change -= numOnes;
 	}
+}
 
 //Calculating number of quarters
-
+while (change > 0.25) {
 	numQuar = (change / 0.25);
-	numQuar = round(numQuar);
 	if (numQuar == 0) {
 		// do nothing.
 	} else if (numQuar == 1) {
@@ -177,9 +180,10 @@ int optChange() {
 		outputStmt += numQuarStr + unitQuar;
 		change -= (numQuar * 0.25);
 	}
+}
 
 //Calculating number of dimes
-
+while (change > 0.10) {
 	numDime = (change / 0.10);
 	numDime = round(numDime);
 	if (numDime == 0) {
@@ -194,6 +198,46 @@ int optChange() {
 		numDimeStr += to_string(numDime);
 		outputStmt += numDimeStr + unitDime;
 		change -= (numDime * 0.10);
+	}
+}
+
+//Calculating number of nickels
+
+	numNick = (change / 0.0455);
+	numNick = round(numNick);
+	if (numNick == 0) {
+		//do nothing.
+	} else if (numNick == 1 && numNick >0) {
+		unitNick = " x nickel \n";
+		numNickStr = to_string(numNick);
+		outputStmt += numNickStr + unitNick;
+		change -= 0.05;
+	} else if (numNick > 1) {
+		unitNick = " x nickels \n";
+		numNickStr += to_string(numNick);
+		outputStmt += numNickStr + unitNick;
+		change -= (numNick * 0.05);
+	}
+	
+
+//Calculating number of pennies
+
+	numPenn = (change / 0.01) + 0.01;
+	if (numPenn == 0) {
+		//do nothing.
+	} else if (numPenn == 1) {
+		unitPenn = " x penny \n";
+		numPennStr = to_string(numPenn);
+		outputStmt += numPennStr + unitPenn;
+		change -= 0.01;
+	} else if (numPenn > 1) {
+		unitPenn = " x pennies \n";
+		if (numPenn <= 3) {
+			numPennStr = to_string(numPenn);
+		} else if (numPenn >= 4) {
+			numPennStr ="4";
+		}
+		outputStmt += numPennStr + unitPenn;
 	}
 
 cout << outputStmt << "\n";
@@ -220,7 +264,7 @@ int main() {
 		numOnesStr = "";
 		numQuarStr = "";
 		numDimeStr = "";
-		outputStmt = "\nOptimal Change: \n";	
+		outputStmt = "\nOptimal Change: \n\n";	
 		optChange();
 		cout << rtry;
 		cin >> ans;
